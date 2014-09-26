@@ -6,8 +6,8 @@
 			main.loaded();	
 			main.slider.init();
 			main.accordion.init();
-			main.magnificPopup();
-			main.youtube.init();	
+			main.youtube.init();
+			main.magnificPopup();	
 
 			$('a[href^=#].scroll-to-btn').click(function(){
 				var target = $($(this).attr('href'));
@@ -58,6 +58,7 @@
 		},
 
 		slider:{
+			
 			init: function(){
 				$('body').on('youtube.loaded', function(){
 					main.slider.ready();
