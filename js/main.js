@@ -7,7 +7,6 @@
 			main.slider.init();
 			main.accordion.init();
 			main.youtube.init();
-			main.magnificPopup();	
 
 			$('a[href^=#].scroll-to-btn').click(function(){
 				var target = $($(this).attr('href'));
@@ -62,6 +61,16 @@
 			init: function(){
 				$('body').on('youtube.loaded', function(){
 					main.slider.ready();
+
+			        $('.popup-video').magnificPopup({
+			          disableOn: 700,
+			          type: 'iframe',
+			          mainClass: 'mfp-fade',
+			          removalDelay: 160,
+			          preloader: false,
+
+			          fixedContentPos: false
+			        });	
 				});
 			},
 
@@ -160,18 +169,6 @@
 		            span.css('width',newW);
 		        });
 		    }
-		},	
-
-		magnificPopup: function () {
-	        $('.popup-video').magnificPopup({
-	          disableOn: 700,
-	          type: 'iframe',
-	          mainClass: 'mfp-fade',
-	          removalDelay: 160,
-	          preloader: false,
-
-	          fixedContentPos: false
-	        });	
 		},			
 
 		accordion: {
