@@ -175,18 +175,17 @@
 
 		youtubeHeight: function(){
 			body_height = $("body").height();
-			new_height = JSON.stringify({"height": body_height+"px"});
-			if (window.self !== window.parent) {
-					top.postMessage(new_height, "https://www.youtube.com/");
-					top.postMessage(new_height, "http://www.youtube.com/");
-			}
-			// console.log(body_height);
-			// console.log(new_height);
-			// console.log('youtube_iframe_resize');
+
+			var new_height = JSON.stringify({"height": body_height+"px"});
+			//console.log(new_height);
+			top.postMessage(new_height, "https://www.youtube.com/");
+			top.postMessage(new_height, "http://www.youtube.com/");
 		},	
 
 		intResize: function(){
-			setTimeout(function() {main.youtubeHeight();}, 10);
+			setTimeout(function() {
+				main.youtubeHeight();
+			}, 10);
 		},
 
 
