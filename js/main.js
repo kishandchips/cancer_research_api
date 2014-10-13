@@ -7,6 +7,7 @@
 			main.slider.init();
 			main.accordion.init();
 			main.youtube.init();
+			main.intResize();
 
 			$('a[href^=#].scroll-to-btn').click(function(){
 				var target = $($(this).attr('href'));
@@ -69,7 +70,8 @@
 			          removalDelay: 160,
 			          preloader: false,
 
-			          fixedContentPos: false
+			          fixedContentPos: false,
+			          verticalFit: true
 			        });	
 				});
 			},
@@ -169,7 +171,24 @@
 		            span.css('width',newW);
 		        });
 		    }
-		},			
+		},	
+
+		youtubeHeight: function(){
+			body_height = $("body").height();
+			new_height = JSON.stringify({"height": body_height+"px"});
+			if (window.self !== window.parent) {
+					top.postMessage(new_height, "https://www.youtube.com/");
+					top.postMessage(new_height, "http://www.youtube.com/");
+			}
+			// console.log(body_height);
+			// console.log(new_height);
+			// console.log('youtube_iframe_resize');
+		},	
+
+		intResize: function(){
+			setTimeout(function() {main.youtubeHeight();}, 10);
+		},
+
 
 		accordion: {
 
@@ -208,6 +227,7 @@
 							}				
 
 							content.eq(currIndex).stop().animate({ height: 0 }, animTime);
+							main.intResize();
 			
 						//OPEN if CLOSED
 						} else {
@@ -231,7 +251,8 @@
 							}
 								
 							content.stop().animate({ height: 0 }, animTime);
-							content.eq(currIndex).stop().animate({ height: targetHeight }, animTime);	
+							content.eq(currIndex).stop().animate({ height: targetHeight }, animTime);
+							main.intResize();	
 						}
 
 						setTimeout(function(){ clickPolice = false; }, animTime);				
