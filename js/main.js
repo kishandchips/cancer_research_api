@@ -180,12 +180,14 @@
 			//console.log(new_height);
 			top.postMessage(new_height, "https://www.youtube.com/");
 			top.postMessage(new_height, "http://www.youtube.com/");
+
+			console.log(new_height);
 		},	
 
 		intResize: function(){
 			setTimeout(function() {
 				main.youtubeHeight();
-			}, 10);
+			}, 250);
 		},
 
 
@@ -198,7 +200,7 @@
 	      	},
 
 	      	ready: function(){
-		  		var animTime = 300,
+		  		var animTime = 200,
 		      		clickPolice = false;	      		
 			  	
 			  	$(document).on('touchstart click', '.acc-btn', function(){
