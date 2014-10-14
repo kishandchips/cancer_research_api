@@ -7,7 +7,6 @@
 			main.slider.init();
 			main.accordion.init();
 			main.youtube.init();
-			main.intResize();
 
 			$('a[href^=#].scroll-to-btn').click(function(){
 				var target = $($(this).attr('href'));
@@ -70,8 +69,24 @@
 			          removalDelay: 160,
 			          preloader: false,
 
-			          fixedContentPos: false,
-			          verticalFit: true
+			          fixedContentPos: true,
+			            callbacks: {
+			                open: function() {
+
+			                    var magnificPopup = $.magnificPopup.instance,
+				                    el = magnificPopup.contentContainer,
+			                    	p = $(parent.document.body),
+			                    	windowHeight = 600, //need to find window height
+			                    	iframe = $('iframe#c4-custom-tab-iframe', p),
+			                    	iframeTop = iframe.offset().top,
+			                    	scrollTop = p.scrollTop(),
+			                    	height = el.height(),
+			                    	top = scrollTop - iframeTop + ( (windowHeight / 2 ) - (height / 2) );
+
+			                    el.css('top', top);
+			                }
+			            }				          
+
 			        });	
 				});
 			},
