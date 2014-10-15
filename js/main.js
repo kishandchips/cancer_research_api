@@ -77,9 +77,12 @@
 				                    el = magnificPopup.contentContainer,
 			                    	p = $(parent.document.body),
 			                    	windowHeight = 600, //need to find window height
-			                    	iframe = $('iframe#c4-custom-tab-iframe', p),
+			                    	iframe = $('#c4-custom-tab-iframe', p),
+			                    	console.log(p);
+			                    	console.log(iframe);
 			                    	iframeTop = iframe.offset().top,
 			                    	scrollTop = p.scrollTop(),
+			                    	console.log(scrollTop);
 			                    	height = el.height(),
 			                    	top = scrollTop - iframeTop + ( (windowHeight / 2 ) - (height / 2) );
 
@@ -88,6 +91,8 @@
 			            }				          
 
 			        });	
+
+			        main.intResize();
 				});
 			},
 
@@ -350,11 +355,19 @@
 		},
 
 		resize: function(){
-		}
+		},
+
+		loaded: function(){
+			main.intResize();
+		},		
 	},
 
 	$(function(){
 		main.init();
+	});
+
+	$(window).load(function(){
+		main.loaded();
 	});
 
 })(jQuery);
