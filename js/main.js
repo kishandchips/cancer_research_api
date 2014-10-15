@@ -78,13 +78,14 @@
 			                    	p = $(parent.document.body),
 			                    	windowHeight = 600, //need to find window height
 			                    	iframe = $('#c4-custom-tab-iframe', p),
-			                    	console.log(p);
-			                    	console.log(iframe);
 			                    	iframeTop = iframe.offset().top,
 			                    	scrollTop = p.scrollTop(),
-			                    	console.log(scrollTop);
 			                    	height = el.height(),
 			                    	top = scrollTop - iframeTop + ( (windowHeight / 2 ) - (height / 2) );
+
+			                    	console.log(p);
+			                    	console.log(iframe);
+			                    	console.log(scrollTop);
 
 			                    el.css('top', top);
 			                }
@@ -359,7 +360,7 @@
 
 		loaded: function(){
 			main.intResize();
-		},		
+		}	
 	},
 
 	$(function(){
