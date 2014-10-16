@@ -24,6 +24,19 @@
 				}
 			});	
 
+		   	$('.popup-video').click(function(e) {
+		        var	posY = $('body').offset().top;
+		        //console.log(e.pageY - posY)
+
+	                    var magnificPopup = $.magnificPopup.instance,
+		                    el = magnificPopup.contentContainer,
+		                    height = el.height(),
+		                    top = (e.pageY - posY) - (height / 2);
+
+	                    //console.log(el);
+	                    el.css('top', top);
+		    });			
+
 			$('.poster').each(function() {
 				var poster = $(this),
 					id = poster.attr('id'),
@@ -69,27 +82,7 @@
 			          removalDelay: 160,
 			          preloader: false,
 
-			          fixedContentPos: true,
-			            callbacks: {
-			                open: function() {
-
-			                    var magnificPopup = $.magnificPopup.instance,
-				                    el = magnificPopup.contentContainer,
-			                    	p = $(parent.document.body),
-			                    	windowHeight = 600, //need to find window height
-			                    	iframe = $('#c4-custom-tab-iframe', p),
-			                    	iframeTop = iframe.offset().top,
-			                    	scrollTop = p.scrollTop(),
-			                    	height = el.height(),
-			                    	top = scrollTop - iframeTop + ( (windowHeight / 2 ) - (height / 2) );
-
-			                    	console.log(p);
-			                    	console.log(iframe);
-			                    	console.log(scrollTop);
-
-			                    el.css('top', top);
-			                }
-			            }				          
+			          fixedContentPos: true			          
 
 			        });	
 
@@ -202,7 +195,7 @@
 			top.postMessage(new_height, "https://www.youtube.com/");
 			top.postMessage(new_height, "http://www.youtube.com/");
 
-			console.log(new_height);
+			//  console.log(new_height);
 		},	
 
 		intResize: function(){
