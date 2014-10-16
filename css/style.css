@@ -1431,10 +1431,6 @@ p {
 .selected {
   color: #1ABC9C; }
 
-/* line 1, scss/_layout.scss */
-body {
-  overflow: hidden; }
-
 /* Preloader */
 /* line 7, scss/_layout.scss */
 #preloader {
@@ -1449,22 +1445,16 @@ body {
   /* makes sure it stays on top */ }
 
 @-webkit-keyframes load8 {
-  /* line 18, scss/_layout.scss */
   0% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
-
-  /* line 22, scss/_layout.scss */
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
 @keyframes load8 {
-  /* line 29, scss/_layout.scss */
   0% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
-
-  /* line 33, scss/_layout.scss */
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
@@ -2274,13 +2264,11 @@ footer[role=contentinfo] {
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-/* line 36, scss/_magnific_popup.scss */
-.mfp-container:before {
+/*.mfp-container:before {
   content: '';
   display: inline-block;
   height: 100%;
-  vertical-align: middle; }
-
+  vertical-align: middle; }*/
 /* line 42, scss/_magnific_popup.scss */
 .mfp-align-top .mfp-container:before {
   display: none; }

@@ -24,16 +24,16 @@
 				}
 			});	
 
-		   	$('.popup-video').click(function(e) {
+		   	$('section').click(function(e) {
 		        var	posY = $('body').offset().top;
-		        //console.log(e.pageY - posY)
+		        console.log(e.pageY - posY);
 
 	                    var magnificPopup = $.magnificPopup.instance,
 		                    el = magnificPopup.contentContainer,
 		                    height = el.height(),
 		                    top = (e.pageY - posY) - (height / 2);
-
-	                    //console.log(el);
+		                console.log('top: ' + el);
+	                    console.log(el);
 	                    el.css('top', top);
 		    });			
 
