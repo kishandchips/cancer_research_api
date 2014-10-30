@@ -24,18 +24,16 @@
 				}
 			});	
 
-		   	$('section').click(function(e) {
-		        var	posY = $('body').offset().top;
-		        console.log(e.pageY - posY);
-
-	                    var magnificPopup = $.magnificPopup.instance,
-		                    el = magnificPopup.contentContainer,
-		                    height = el.height(),
-		                    top = (e.pageY - posY) - (height / 2);
-		                console.log('top: ' + el);
-	                    console.log(el);
-	                    el.css('top', top);
-		    });			
+			// $('section').click(function(e) {
+			// 	var	posY = $('body').offset().top;
+				
+			// 	var magnificPopup = $.magnificPopup.instance,
+			// 		el = magnificPopup.contentContainer,
+			// 		height = el.height(),
+			// 		top = (e.pageY - posY) - (height / 2);
+				
+			// 	el.css('top', top);
+			// });			
 
 			$('.poster').each(function() {
 				var poster = $(this),
@@ -75,18 +73,33 @@
 				$('body').on('youtube.loaded', function(){
 					main.slider.ready();
 
-			        $('.popup-video').magnificPopup({
-			          disableOn: 700,
-			          type: 'iframe',
-			          mainClass: 'mfp-fade',
-			          removalDelay: 160,
-			          preloader: false,
+					$('.popup-video').magnificPopup({
+						disableOn: 700,
+						type: 'iframe',
+						mainClass: 'mfp-fade',
+						removalDelay: 160,
+						preloader: false,
+						fixedContentPos: true,		          
+						callbacks: {
+							open: function(){
+								var magnificPopup = this,
+				                    el = magnificPopup.contentContainer,
+			                    	btn = $(magnificPopup.st.el),
+			                    	d = ( main.isIframed() ) ? $(window.parent.document) : $(document);
+			                    	windowHeight = 600, //need to find window height
+			                    	iframeTop = 350,
+			                    	scrollTop = ( main.isIframed() ) ? btn.offset().top : d.scrollTop(),
+			                    	height = el.height(),
+			                    	posTop = scrollTop - iframeTop + ( (windowHeight / 2 ) - (height / 2) );
 
-			          fixedContentPos: true			          
+			                   	if(posTop <= 20) posTop = 50;
 
-			        });	
+			                    el.css('top', posTop);
+							}
+						}
+					});	
 
-			        main.intResize();
+					main.intResize();
 				});
 			},
 
@@ -113,36 +126,36 @@
 			init: function(){
 				// CREDENTIALS
 				var apiCall = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=";
-	            var userKey = "&key=AIzaSyCdaJojH7u4H3jAjtuZ56p8fJV0xZ4UoXc";
-	            //HANDLEBARS
+				var userKey = "&key=AIzaSyCdaJojH7u4H3jAjtuZ56p8fJV0xZ4UoXc";
+				//HANDLEBARS
 				var source   = $("#home-video-template").html();
-	            var template = Handlebars.compile(source);
+				var template = Handlebars.compile(source);
 
-	            if($('body').hasClass('home')){
-		            $('.acc-content, .newest').each(function(){
-		                var id = $(this).data('playlist-id');
-		                var container = $(this).children('.acc-content-inner');
+				if($('body').hasClass('home')){
+					$('.acc-content, .newest').each(function(){
+						var id = $(this).data('playlist-id');
+						var container = $(this).children('.acc-content-inner');
 
-		                $.ajax({
-		                    url: apiCall + id + userKey,
-		                }).done(function(data){
-		                    var html  = template(data);
-		                    container.append(html);
-		                    $('body').trigger('youtube.loaded');
-		                });
-		            });	            	
-	            } else {
-		            $('.video-group').each(function(){
-		                var id = $(this).data('playlist-id');
-		                var container = $(this).children('.section-inner');
+						$.ajax({
+							url: apiCall + id + userKey,
+						}).done(function(data){
+							var html  = template(data);
+							container.append(html);
+							$('body').trigger('youtube.loaded');
+						});
+					});	            	
+				} else {
+					$('.video-group').each(function(){
+						var id = $(this).data('playlist-id');
+						var container = $(this).children('.section-inner');
 
-		                $.ajax({
-		                    url: apiCall + id + userKey,
-		                }).done(function(data){ 
-		                    // Remove first element to use in first slide
-		                    data.first = data.items[0];
+						$.ajax({
+							url: apiCall + id + userKey,
+						}).done(function(data){ 
+							// Remove first element to use in first slide
+							data.first = data.items[0];
 
-		                	//Clone data object
+							//Clone data object
 							var newData = jQuery.extend(true, {}, data);
 							//Remove first element to skip first slide
 							newData.items.shift();
@@ -150,20 +163,20 @@
 							//Split newData into groups of 4 and push to new dataArray
 							var dataArray = [], size = 4;
 							while (newData.items.length > 0){
-							    dataArray.push(newData.items.splice(0, size));
+								dataArray.push(newData.items.splice(0, size));
 							}
 
 							//Assign new array to groups
 							newData.groups = dataArray;
 
 							//Use dataArray in template
-		                    var html  = template(newData);
-		                    
-		                    container.append(html);
-		                    $('body').trigger('youtube.loaded');
-		                });
-		            });
-	            }
+							var html  = template(newData);
+							
+							container.append(html);
+							$('body').trigger('youtube.loaded');
+						});
+					});
+				}
 
 			}
 		},
@@ -175,26 +188,28 @@
 
 		setBoxSizing: function(){
 			if( $('html').hasClass('no-boxsizing') ){
-		        $('.span:visible').each(function(){
-		        	var span = $(this);
-		            var fullW = span.outerWidth(),
-		                actualW = span.width(),
-		                wDiff = fullW - actualW,
-		                newW = actualW - wDiff;
-		 			
-		            span.css('width',newW);
-		        });
-		    }
+				$('.span:visible').each(function(){
+					var span = $(this);
+					var fullW = span.outerWidth(),
+						actualW = span.width(),
+						wDiff = fullW - actualW,
+						newW = actualW - wDiff;
+					
+					span.css('width',newW);
+				});
+			}
 		},	
 
 		youtubeHeight: function(){
-			body_height = $("body").height();
+			if( main.isIframed() ) {
+			
+				body_height = $("body").height();
 
-			var new_height = JSON.stringify({"height": body_height+"px"});
-			//console.log(new_height);
-			top.postMessage(new_height, "https://www.youtube.com/");
-			top.postMessage(new_height, "http://www.youtube.com/");
-
+				var new_height = JSON.stringify({"height": body_height+"px"});
+			
+				top.postMessage(new_height, "https://www.youtube.com/");
+				top.postMessage(new_height, "http://www.youtube.com/");
+			}
 			//  console.log(new_height);
 		},	
 
@@ -209,15 +224,15 @@
 
 			init: function(){
 
-		      	main.accordion.ready();
+				main.accordion.ready();
 
-	      	},
+			},
 
-	      	ready: function(){
-		  		var animTime = 200,
-		      		clickPolice = false;	      		
-			  	
-			  	$(document).on('touchstart click', '.acc-btn', function(){
+			ready: function(){
+				var animTime = 200,
+					clickPolice = false;	      		
+				
+				$(document).on('touchstart click', '.acc-btn', function(){
 					if(!clickPolice){
 						clickPolice = true;
 
@@ -237,8 +252,8 @@
 								currPoster = $('.poster', selected),
 								currPlayer = $('.player', selected);				
 
-							if(main.Player.player) {
-								main.Player.player.pauseVideo();
+							if(main.player.player) {
+								main.player.player.pauseVideo();
 							}				
 
 							content.eq(currIndex).stop().animate({ height: 0 }, animTime);
@@ -259,9 +274,9 @@
 							
 							$('.player', selected).append(vidPlayer);
 							
-							if(main.Player.player) {
+							if(main.player.player) {
 								setTimeout(function() {
-									main.Player.player.pauseVideo();
+									main.player.player.pauseVideo();
 								}, 1000);
 							}
 								
@@ -272,13 +287,13 @@
 
 						setTimeout(function(){ clickPolice = false; }, animTime);				
 					}				    
-			  	});
+				});
 
 				$(document).on('click','.play-btn', function(event) {
 					event.preventDefault();
 					var id = $(this).attr('href');
 
-					main.Player.init(id);
+					main.player.init(id);
 
 
 					$('.acc-content.selected .poster').hide();
@@ -294,34 +309,31 @@
 			}
 		},
 
-
-
-
-		Player: {
+		player: {
 			element: $('#player'),
 
 			init: function(id){
-			    var element = main.Player.element,
-			    	loaded = main.Player.loaded = false,
-			    	completed = main.Player.completed = false,
-			    	player = main.Player.player;
+				var element = main.player.element,
+					loaded = main.player.loaded = false,
+					completed = main.player.completed = false,
+					player = main.player.player;
 
-			    if(element.length){
-			    	if(YT){
-			    		if (!main.Player.player) {
-						    main.Player.player = new YT.Player('player', {
+				if(element.length){
+					if(YT){
+						if (!main.player.player) {
+							main.player.player = new YT.Player('player', {
 								height: '100%',
 								width: '100%',
 								videoId: id,
 								events: {
-									'onReady': main.Player.onPlayerReady
+									'onReady': main.player.onPlayerReady
 								},
 								playerVars: {
 									autoplay: 1
 								}
 							});
 						} else {
-							main.Player.player.loadVideoById(id);
+							main.player.player.loadVideoById(id);
 						}
 					} else {
 						element.hide();
@@ -330,20 +342,20 @@
 			},
 
 			destroy: function() {
-				main.Player.player.destroy();
+				main.player.player.destroy();
 			},
 
 			onPlayerReady: function (event) {
 				event.target.playVideo();
-				if(!main.Player.loaded){		 	
-					main.Player.player.addEventListener('onStateChange', main.Player.onPlayerStateChange);
-					main.Player.loaded = true;
+				if(!main.player.loaded){		 	
+					main.player.player.addEventListener('onStateChange', main.player.onPlayerStateChange);
+					main.player.loaded = true;
 				}
 			},
 
 			onPlayerStateChange: function (event) {
-				if(event.data === 0 && !main.Player.completed) {            
-					main.Player.completed = true;
+				if(event.data === 0 && !main.player.completed) {            
+					main.player.completed = true;
 				}
 			}
 		},
@@ -353,8 +365,12 @@
 
 		loaded: function(){
 			main.intResize();
-		}	
-	},
+		},
+
+		isIframed: function(){
+			return (window.location != window.parent.location) ? true : false;
+		}
+	};
 
 	$(function(){
 		main.init();

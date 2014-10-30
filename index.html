@@ -139,6 +139,26 @@
               </div>
             </div>
 
+            <!-- Prostate Cancer -->
+            <div class="acc-btn">
+                <h1>
+                    <div class="viewer">
+                        <div class="posterframe">
+                            <img src="images/misc/prostate_cancer_poster.jpg" alt="">
+                            <figcaption>
+                                <span class="learnmore">Learn More About</span>
+                                <h1>Your Stories</h1>
+                                <span class="chevron"></span>
+                            </figcaption>
+                        </div>
+                    </div> 
+                </h1>
+            </div>
+            <div class="acc-content" data-playlist-id="PLr5-SOgrB_Uo28h3OH0f8umlteef0Rhgd">
+                <div class="acc-content-inner">
+              </div>
+            </div>
+
         </div><!-- .acc-container -->
     </div><!-- #main -->
 </div><!-- #wrap -->
@@ -172,33 +192,32 @@
     {{#with snippet}}
     {{#unless @index}}
 
-        <div id="{{resourceId.videoId}}" class="poster two">
-            <a href="{{resourceId.videoId}}" class="play-btn"></a>
-            <img src="{{thumbnails.high.url}}" class="scaleup">
-        </div>
+    <div id="{{resourceId.videoId}}" class="poster two video-thumb">
+        <a href="{{resourceId.videoId}}" class="play-btn"></a>
+        <img src="{{thumbnails.high.url}}" class="scaleup">
+    </div>
 
-        <div class="player video-container">            
-        </div>
+    <div class="player video-container"></div>
 
-        <div class="flexslider" style="background-image: url('images/misc/prostate_cancer_poster.jpg');">
-            <ul class="slides">
+    <div class="flexslider" style="background-image: url('images/misc/prostate_cancer_poster.jpg');">
+        <ul class="slides">
 
-    {{/unless}}
-    {{#if @index}}
+        {{/unless}}
+        {{#if @index}}
 
-                <li>
-                    <a href="{{resourceId.videoId}}"class="play-btn" >
-                        <div class="video-thumb">
-                            <img src="{{thumbnails.high.url}}">    
-                        </div>
-                    <p>{{title}}</p>
-                    </a>
-                </li>
-    {{/if}}
-    {{/with}}                    
-{{/each}}
-            </ul>
-        </div>
+            <li>
+                <a href="{{resourceId.videoId}}"class="play-btn" >
+                    <div class="video-thumb">
+                        <img src="{{thumbnails.high.url}}">    
+                    </div>
+                <p>{{title}}</p>
+                </a>
+            </li>
+        {{/if}}
+        {{/with}}                    
+        {{/each}}
+        </ul>
+    </div>
 
     <a class="footer-btn">
         Close

@@ -115,7 +115,7 @@ http://facebook.com/kishandchips
 <script id="home-video-template" type="text/x-handlebars-template">
 
 <div class="span five">
-    <a class="popup-video" href="https://www.youtube.com/watch?v={{first.snippet.resourceId.videoId}}">
+    <a class="popup-video video-thumb" href="https://www.youtube.com/watch?v={{first.snippet.resourceId.videoId}}">
         <img src="{{first.snippet.thumbnails.high.url}}" alt="">
     <span class="caption">  
         <p>{{first.snippet.title}}</p>
@@ -129,7 +129,7 @@ http://facebook.com/kishandchips
         <li>
             {{#each this}}
                 <div class="span five">
-                    <a class="popup-video" href="https://www.youtube.com/watch?v={{snippet.resourceId.videoId}}">
+                    <a class="popup-video video-thumb" href="https://www.youtube.com/watch?v={{snippet.resourceId.videoId}}">
                         <img src="{{snippet.thumbnails.high.url}}" alt="">
                         <span class="caption">  
                             <p>{{snippet.title}}</p> 

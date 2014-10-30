@@ -71,7 +71,7 @@ img {
 .valign-center {
 	position: absolute;
 	top: 50%;
-	@include translateY(-50%)
+	@include translateY(-50%);
 }
 
 hr {
@@ -96,7 +96,7 @@ hr {
 
 .video-container {
   position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
+  padding-bottom: 57%; /* 16:9 */
   padding-top: 25px;
   height: 0;
 
@@ -109,7 +109,24 @@ hr {
     }
 }
 
+.video-thumb {
+    position: relative;
+    padding-bottom: 52%;
+    height: 0;
+    overflow: hidden;
 
+    img {
+        position: absolute;
+        top: 50%;
+        @include translateY(-50%);
+
+        z-index: 0;
+
+        .no-csstransforms {
+          top: -22%;
+        }
+    }
+}
 
 /* =============================================================================
    Lists
