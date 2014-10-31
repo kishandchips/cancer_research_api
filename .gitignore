@@ -4,3 +4,4 @@
 /.sass-cache/
 sftp-config.json
 /iframe.html
+.DS_Store
