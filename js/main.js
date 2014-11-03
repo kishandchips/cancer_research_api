@@ -126,7 +126,7 @@
 			init: function(){
 				// CREDENTIALS
 				var apiCall = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=";
-				var userKey = "&key=AIzaSyCdaJojH7u4H3jAjtuZ56p8fJV0xZ4UoXc";
+				var userKey = "&key=AIzaSyBaHC5kwCgRB5VHhkgP51mhVoOeah-rHcQ";
 				//HANDLEBARS
 				var source   = $("#home-video-template").html();
 				var template = Handlebars.compile(source);
