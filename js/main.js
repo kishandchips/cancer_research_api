@@ -85,7 +85,7 @@
 								var magnificPopup = this,
 				                    el = magnificPopup.contentContainer,
 			                    	btn = $(magnificPopup.st.el),
-			                    	d = ( main.isIframed() ) ? $(window.parent.document) : $(document);
+			                    	d = $(document),
 			                    	windowHeight = 600, //need to find window height
 			                    	iframeTop = 350,
 			                    	scrollTop = ( main.isIframed() ) ? btn.offset().top : d.scrollTop(),
