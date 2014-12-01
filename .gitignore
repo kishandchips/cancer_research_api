@@ -3,4 +3,5 @@
 /woocommerce/.DS_Store
 /.sass-cache/
 sftp-config.json
-iframe.html
+/iframe.html
+.DS_Store

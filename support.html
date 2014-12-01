@@ -48,12 +48,12 @@
             </div>
         </section><!-- .most-popular -->
 
-        <section class="your-stories video-group" data-playlist-id="PLr5-SOgrB_Uo28h3OH0f8umlteef0Rhgd">
+        <!--section class="your-stories video-group" data-playlist-id="PLr5-SOgrB_Uo28h3OH0f8umlteef0Rhgd">
             <h1 class="section-title">Your Stories</h1>
 
             <div class="section-inner">
             </div>
-        </section><!-- .your-stories -->
+        </section--><!-- .your-stories -->
 
         <div class="links">
             <a class="span seven" href="index.html">
@@ -96,7 +96,7 @@
 <script id="home-video-template" type="text/x-handlebars-template">
 
 <div class="span five">
-    <a class="popup-video" href="https://www.youtube.com/watch?v={{first.snippet.resourceId.videoId}}">
+    <a class="popup-video video-thumb" href="https://www.youtube.com/watch?v={{first.snippet.resourceId.videoId}}">
         <img src="{{first.snippet.thumbnails.high.url}}" alt="">
     <span class="caption">  
         <p>{{first.snippet.title}}</p>
@@ -110,7 +110,7 @@
         <li>
             {{#each this}}
                 <div class="span five">
-                    <a class="popup-video" href="https://www.youtube.com/watch?v={{snippet.resourceId.videoId}}">
+                    <a class="popup-video video-thumb" href="https://www.youtube.com/watch?v={{snippet.resourceId.videoId}}">
                         <img src="{{snippet.thumbnails.high.url}}" alt="">
                         <span class="caption">  
                             <p>{{snippet.title}}</p> 
